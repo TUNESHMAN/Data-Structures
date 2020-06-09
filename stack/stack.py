@@ -68,7 +68,7 @@ class Linked_stack:
         # reference to tail of the list
         #self.tail = None
 
-    def add(self, value):
+    def add_to_end(self, value):
         # Regardless of if the list is empty or not, we will need a new node.
         new_node = Node(value)
         # We need to think of two edge cases, whether the list is empty or not
@@ -76,8 +76,20 @@ class Linked_stack:
         if not self.head:  # If there is no head, our new node becomes the head
             self.head = new_node
         else:  # if there is a head, our new node will be added to the last node on the list. To get to the last node on the list, we need to traverse it.
-            current_node=self.head
+            current_node = self.head
             while current_node.get_next() is not None:
-                current=current_node.get_next()
-            #At the end of the list, 
+                current = current_node.get_next()
+            # At the end of the list,
             current.set_next(new_node)
+
+    def remove_from_end(self):
+        if not self.head:  # If there is no head
+            return None
+        else:  # similarly, we need to traverse the list to get to the end
+            current_node = self.head
+            while current_node.get_next() is not None:
+                current = current_node.get_next()
+            # At the end of the list,
+            end_value = current.get_value()
+            #We remove the value of the last node
+            return end_value
