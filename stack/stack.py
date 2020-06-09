@@ -26,21 +26,22 @@ class Stack:
 
     def pop(self):
         if self.size > 0:
-            a=self.storage.pop()
-            self.size-=1
+            a = self.storage.pop()
+            self.size -= 1
             return a
-s=Stack()
+
+
+s = Stack()
 s.push(5.8)
 s.push(8)
 s.push(70)
 s.push(598)
 s.pop()
 print(s.storage)
-          
 
 
 # With the linked list implementation
-class ClassName:
+class Node:
     def __init__(self, value=None, next_node=None):
         # set the initial value of the node
         self.value = value
@@ -54,15 +55,29 @@ class ClassName:
     def get_next(self):
         return self.next_node
 
-    def set_next(self, new_node):
-        self.next_node = new_node
+    def set_next(self, new_next):
+        self.next_node = new_next
 
 # The linked list here
 
 
 class Linked_stack:
     def __init__(self):
-        # the initial value will be a reference to head
+        # the initial value will be a reference to head which is the first node in the list
         self.head = None
         # reference to tail of the list
-        self.tail = None
+        #self.tail = None
+
+    def add(self, value):
+        # Regardless of if the list is empty or not, we will need a new node.
+        new_node = Node(value)
+        # We need to think of two edge cases, whether the list is empty or not
+        # If the list is empty, we wrap the value in a node and make it the head
+        if not self.head:  # If there is no head, our new node becomes the head
+            self.head = new_node
+        else:  # if there is a head, our new node will be added to the last node on the list. To get to the last node on the list, we need to traverse it.
+            current_node=self.head
+            while current_node.get_next() is not None:
+                current=current_node.get_next()
+            #At the end of the list, 
+            current.set_next(new_node)
