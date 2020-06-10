@@ -61,7 +61,7 @@ class Node:
 # The linked list here
 
 
-class Linked_stack:
+class Linked_list:
     def __init__(self):
         # the initial value will be a reference to head which is the first node in the list
         self.head = None
@@ -78,9 +78,9 @@ class Linked_stack:
         else:  # if there is a head, our new node will be added to the last node on the list. To get to the last node on the list, we need to traverse it.
             current_node = self.head
             while current_node.get_next() is not None:
-                current = current_node.get_next()
+                current_node = current_node.get_next()
             # At the end of the list,
-            current.set_next(new_node)
+            current_node.set_next(new_node)
 
     def remove_from_end(self):
         if not self.head:  # If there is no head
@@ -88,8 +88,31 @@ class Linked_stack:
         else:  # similarly, we need to traverse the list to get to the end
             current_node = self.head
             while current_node.get_next() is not None:
-                current = current_node.get_next()
+                current_node = current_node.get_next()
             # At the end of the list,
-            end_value = current.get_value()
+            end_value = current_node.get_value()
             #We remove the value of the last node
             return end_value
+
+
+class Stack_list:
+    def __init__(self):
+        self.size = 0
+        self.storage = Linked_list()
+
+    def __len__(self):
+        return self.size
+
+    def push(self, value):
+        self.storage.add_to_end(value)
+        self.size += 1
+
+    def pop(self):
+        if self.size > 0:
+            a = self.storage.remove_from_end()
+            self.size -= 1
+            return a
+
+t = Stack_list()
+t.push(99)
+print(t.pop())
