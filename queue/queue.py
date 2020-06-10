@@ -13,28 +13,29 @@ return elements in First In First Out order.
 Stretch: What if you could only use instances of your Stack class to implement the Queue?
          What would that look like? How many Stacks would you need? Try it!
 """
+
+
 class Queue:
     def __init__(self):
         self.size = 0
         self.storage = []
-    
+
     def __len__(self):
         return self.size
 
     def enqueue(self, value):
-        a=self.storage.insert(0,value)
-        self.size+=1
+        a = self.storage.insert(0, value)
+        self.size += 1
         return a
 
     def dequeue(self):
-        if self.size>0:
-            b=self.storage.pop()
-            self.size-=0
+        if self.size > 0:
+            b = self.storage.pop()
+            self.size -= 0
             return b
-            
-    
-    
-q=Queue()
+
+
+q = Queue()
 q.enqueue(1)
 q.enqueue(2)
 q.enqueue(3)
@@ -43,19 +44,20 @@ q.enqueue(5)
 q.dequeue()
 print(q.storage)
 
-#With linked list
+# With linked list
+
+
 class Queue:
     def __init__(self, value=None, next_node=None):
-       #Here, we set the initial value of the node
-       self.value=value
-       self.next_node=next_node
-       
-#Define methods for getting values, getting next node, and setting the next node.
+        # Here, we set the initial value of the node
+        self.value = value
+        self.next_node = next_node
+
+# Define methods for getting values, getting next node, and setting the next node.
 
     def get_values(self, value):
         return self.value
-    
-    
+
     def get_next(self):
         return self.next_node
 
@@ -92,10 +94,7 @@ class Linked_stack:
         else:  # Here, we are concerned about removing the first element which is the head element
             current_node = self.head
             while current_node.get_next() is not None:
-            # At the end of the list,
-            start_value = current_node.get_value()
-            #We remove the value of the last node
+                # At the end of the list,
+                start_value = current_node.get_value()
+            # We remove the value of the last node
             return start_value
-
-        
-        
