@@ -84,7 +84,16 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self)
+
+        # Left case
+
+        if self.left:
+            self.left.for_each(fn)
+
+        # Right case
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
