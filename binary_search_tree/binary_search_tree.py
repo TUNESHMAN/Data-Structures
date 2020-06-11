@@ -9,6 +9,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -17,14 +19,49 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # Here, there are 2 possible cases. We can either insert to the left or right.
+        # We insert to the left if the value of what we are inserting is less than out self.value which is the root value
+        if value <= self.value:
+            # Move to the left and check if it is none
+            if not self.left:
+                # we insert the node here and set the self.left to be our value
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        # Otherwise, we do the right case
+        else:
+            if not self.right:
+                # We insert the node here and set the self.right to be our value
+                self.right = BSTNode(value)
+                # otherwise
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        # To know if a binary tree contains a value, we have to check if the target equals the self.value and its left and right elements
+        if target == self.value:
+            return True
+        # left case
+        if target < self.value:
+            #We first check if there is anything to the left of self.value
+            if self.left is None:
+                return False
+            else:
+            #We bring in our contain method to look for it
+                self.left.contains(target)
+        #Otherwise we do the right case
+        if target > self.value:
+            #We first check if there is anything to the right of self.value
+            if self.right is None:
+                return False
+            else:
+                #We check with our contain method
+                self.right.contains(target)
 
-    # Return the maximum value found in the tree
+            # Return the maximum value found in the tree
+
     def get_max(self):
         pass
 
