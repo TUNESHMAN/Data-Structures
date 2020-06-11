@@ -72,30 +72,47 @@ class DoublyLinkedList:
     Returns the value of the removed Node."""
 
     def remove_from_head(self):
-        #When deleting, we want to return the value that was deleted. Hence, it needs to be stored somewhere
-        value_to_be_removed= self.head.value
+        # When deleting, we want to return the value that was deleted. Hence, it needs to be stored somewhere
+        value_to_be_removed = self.head.value
         if self.head is None:
             return None
         else:
-            next_head=self.head.next
-            self.head=next_head
+            next_head = self.head.next
+            self.head = next_head
             self.head.delete()
+            self.length -= 1
             return value_to_be_removed
-            
 
     """Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
     the old tail node's next pointer accordingly."""
 
     def add_to_tail(self, value):
-        pass
+        # create the new node
+        new_node = ListNode(value, None, None)
+        self.length += 1
+        if not self.tail:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            new_node.prev = self.tail
+            self.tail.next = new_node
+            self.tail = new_node
 
     """Removes the List's current tail node, making the 
     current tail's previous node the new tail of the List.
     Returns the value of the removed Node."""
 
     def remove_from_tail(self):
-        pass
+        value_to_be_deleted = self.tail.value
+        if self.tail is None:
+            return None
+        else:
+            new_tail = self.tail.prev
+            self.tail.delete()
+            self.tail = new_tail
+            self.length -= 1
+            return value_to_be_deleted
 
     """Removes the input node from its current spot in the 
     List and inserts it as the new head node of the List."""
