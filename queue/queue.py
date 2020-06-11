@@ -63,7 +63,6 @@ class Linked_stack:
         # the initial value will be a reference to head which is the first node in the list
         self.head = None
         # reference to tail of the list
-        # self.tail = None
 
     def add_to_end(self, value):
         # Regardless of if the list is empty or not, we will need a new node.
@@ -77,7 +76,7 @@ class Linked_stack:
             while current_node.get_next() is not None:
                 current_node = current_node.get_next()
             # At the end of the list,
-                print("dhhddhd")
+
             current_node.set_next(new_node)
 
     def remove_from_start(self):
@@ -85,8 +84,6 @@ class Linked_stack:
             return None
         else:  # Here, we are concerned about removing the first element which is the head element
             current_node = self.head
-            #while current_node.get_next() is not None:
-                # At the end of the list,
             self.head = self.head.get_next()
             # We remove the value of the last node
             return current_node.value
@@ -103,7 +100,6 @@ class Queue_list:
     def enqueue(self, value):
         self.storage.add_to_end(value)
         self.size += 1
-      
 
     def dequeue(self):
         if self.size > 0:
@@ -111,7 +107,8 @@ class Queue_list:
             self.size -= 1
             return b
 
-u=Queue_list()
+
+u = Queue_list()
 u.enqueue(5)
 u.enqueue(8)
 u.enqueue(20)

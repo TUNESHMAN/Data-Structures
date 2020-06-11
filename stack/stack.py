@@ -66,7 +66,6 @@ class Linked_list:
         # the initial value will be a reference to head which is the first node in the list
         self.head = None
         # reference to tail of the list
-        #self.tail = None
 
     def add_to_end(self, value):
         # Regardless of if the list is empty or not, we will need a new node.
