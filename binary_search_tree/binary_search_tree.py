@@ -45,25 +45,42 @@ class BSTNode:
             return True
         # left case
         if target < self.value:
-            #We first check if there is anything to the left of self.value
+            # We first check if there is anything to the left of self.value
             if self.left is None:
                 return False
             else:
-            #We bring in our contain method to look for it
+                # We bring in our contain method to look for it
                 self.left.contains(target)
-        #Otherwise we do the right case
+        # Otherwise we do the right case
         if target > self.value:
-            #We first check if there is anything to the right of self.value
+            # We first check if there is anything to the right of self.value
             if self.right is None:
                 return False
             else:
-                #We check with our contain method
+                # We check with our contain method
                 self.right.contains(target)
 
             # Return the maximum value found in the tree
 
     def get_max(self):
-        pass
+        # If the tree is empty, there would be no max or min value
+        if self is None:
+            return None
+        # Otherwise, we have to traverse the tree to the right since the max value will likely be there
+        while self.right:
+            self = self.right
+            # If there isn't a right child again, return the value
+        return self.value
+
+    def get_min(self):
+        # If the binary tree is empty, there will be no minimum value
+        if self is None:
+            return None
+        # Otherwise, we traverse the left of the tree to get the minimum value
+        while self.left:
+            self = self.left
+            # If there is no more left child, we return the value of self
+        return self.value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
