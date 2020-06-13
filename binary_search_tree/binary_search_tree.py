@@ -1,3 +1,5 @@
+from queue import Queue
+from stack import Stack
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -84,7 +86,7 @@ class BSTNode:
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        fn(self)
+        fn(self.value)
 
         # Left case
 
@@ -105,17 +107,42 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # This uses the queue since it is a FIFO operation
+        # First, create a new node to the queue
+        queue = Queue()
+        queue.enqueue(node)
+        # We need to check for emptiness
+        while queue.storage.length > 0:
+            # We dequeue and store it somewhere
+            removed_node = queue.dequeue(node)
+            # Check if there is anything to the left and right of removed_node and add it to the queue
+            if removed_node.left:
+                queue.enqueue(removed_node.left)
+            if removed_node.right:
+                queue.enqueue(removed_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
-        pass
+        # The depth first approach uses the LIFO approach hence we use a stack
+        # Similarly, we create a new node to the stack
+        s = Stack()
+        stack_store.push(node)
+        # Also, we check for emptiness
+        while s_store.storage.length > 0:
+            # We pop the node
+            popped_node = stack_store.pop()
+            if popped_node.left:
+            popped_node.push(popped_node.left)
+            if popped_node.right:
+                popped_node.push(popped_node.right)
 
-    # Stretch Goals -------------------------
-    # Note: Research may be required
+            # Stretch Goals -------------------------
+            # Note: Research may be required
 
-    # Print Pre-order recursive DFT
+            # Print Pre-order recursive DFT
+
     def pre_order_dft(self, node):
         pass
 
