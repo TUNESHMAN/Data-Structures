@@ -134,7 +134,7 @@ class BSTNode:
             # We pop the node
             popped_node = stack_store.pop()
             if popped_node.left:
-            popped_node.push(popped_node.left)
+                popped_node.push(popped_node.left)
             if popped_node.right:
                 popped_node.push(popped_node.right)
 
