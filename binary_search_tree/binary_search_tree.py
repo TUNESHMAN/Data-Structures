@@ -115,6 +115,7 @@ class BSTNode:
         while queue.storage.length > 0:
             # We dequeue and store it somewhere
             removed_node = queue.dequeue(node)
+            print(removed_node.value)
             # Check if there is anything to the left and right of removed_node and add it to the queue
             if removed_node.left:
                 queue.enqueue(removed_node.left)
@@ -127,12 +128,13 @@ class BSTNode:
     def dft_print(self, node):
         # The depth first approach uses the LIFO approach hence we use a stack
         # Similarly, we create a new node to the stack
-        s = Stack()
+        stack_store = Stack()
         stack_store.push(node)
         # Also, we check for emptiness
-        while s_store.storage.length > 0:
+        while stack_store.storage.length > 0:
             # We pop the node
             popped_node = stack_store.pop()
+            print(popped_node.value)
             if popped_node.left:
                 popped_node.push(popped_node.left)
             if popped_node.right:
