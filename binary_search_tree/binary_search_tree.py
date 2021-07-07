@@ -1,3 +1,5 @@
+from queue import Queue
+from stack import Stack
 """
 Binary search trees are a data structure that enforce an ordering over 
 the data they store. That ordering in turn makes it a lot more efficient 
@@ -9,6 +11,8 @@ This part of the project comprises two days:
 2. Implement the `in_order_print`, `bft_print`, and `dft_print` methods
    on the BSTNode class.
 """
+
+
 class BSTNode:
     def __init__(self, value):
         self.value = value
@@ -17,20 +21,81 @@ class BSTNode:
 
     # Insert the given value into the tree
     def insert(self, value):
-        pass
+        # Here, there are 2 possible cases. We can either insert to the left or right.
+        # We insert to the left if the value of what we are inserting is less than out self.value which is the root value
+        if value <= self.value:
+            # Move to the left and check if it is none
+            if not self.left:
+                # we insert the node here and set the self.left to be our value
+                self.left = BSTNode(value)
+            else:
+                self.left.insert(value)
+        # Otherwise, we do the right case
+        else:
+            if not self.right:
+                # We insert the node here and set the self.right to be our value
+                self.right = BSTNode(value)
+                # otherwise
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        # To know if a binary tree contains a value, we have to check if the target equals the self.value and its left and right elements
+        if target == self.value:
+            return True
+        # left case
+        if target < self.value:
+            # We first check if there is anything to the left of self.value
+            if self.left is None:
+                return False
+            else:
+                # We bring in our contain method to look for it
+                self.left.contains(target)
+        # Otherwise we do the right case
+        if target > self.value:
+            # We first check if there is anything to the right of self.value
+            if self.right is None:
+                return False
+            else:
+                # We check with our contain method
+                self.right.contains(target)
 
-    # Return the maximum value found in the tree
+            # Return the maximum value found in the tree
+
     def get_max(self):
-        pass
+        # If the tree is empty, there would be no max or min value
+        if self is None:
+            return None
+        # Otherwise, we have to traverse the tree to the right since the max value will likely be there
+        while self.right:
+            self = self.right
+            # If there isn't a right child again, return the value
+        return self.value
+
+    def get_min(self):
+        # If the binary tree is empty, there will be no minimum value
+        if self is None:
+            return None
+        # Otherwise, we traverse the left of the tree to get the minimum value
+        while self.left:
+            self = self.left
+            # If there is no more left child, we return the value of self
+        return self.value
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        fn(self.value)
+
+        # Left case
+
+        if self.left:
+            self.left.for_each(fn)
+
+        # Right case
+        if self.right:
+            self.right.for_each(fn)
 
     # Part 2 -----------------------
 
@@ -42,17 +107,44 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        # This uses the queue since it is a FIFO operation
+        # First, create a new node to the queue
+        queue = Queue()
+        queue.enqueue(node)
+        # We need to check for emptiness
+        while queue.storage.length > 0:
+            # We dequeue and store it somewhere
+            removed_node = queue.dequeue(node)
+            print(removed_node.value)
+            # Check if there is anything to the left and right of removed_node and add it to the queue
+            if removed_node.left:
+                queue.enqueue(removed_node.left)
+            if removed_node.right:
+                queue.enqueue(removed_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
-        pass
+        # The depth first approach uses the LIFO approach hence we use a stack
+        # Similarly, we create a new node to the stack
+        stack_store = Stack()
+        stack_store.push(node)
+        # Also, we check for emptiness
+        while stack_store.storage.length > 0:
+            # We pop the node
+            popped_node = stack_store.pop()
+            print(popped_node.value)
+            if popped_node.left:
+                popped_node.push(popped_node.left)
+            if popped_node.right:
+                popped_node.push(popped_node.right)
 
-    # Stretch Goals -------------------------
-    # Note: Research may be required
+            # Stretch Goals -------------------------
+            # Note: Research may be required
 
-    # Print Pre-order recursive DFT
+            # Print Pre-order recursive DFT
+
     def pre_order_dft(self, node):
         pass
 
